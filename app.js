@@ -18,7 +18,7 @@ const $=s=>document.querySelector(s);
 
 // Google Apps Script Web App endpoint. Paste the deployed /exec URL here after deployment.
 const DELIVERY_CONFIG={
-  webAppUrl:"https://script.google.com/macros/s/AKfycbx1sno8dbjjgdaV8P-znggJRIfXQ7RRUboVDaPI_XVKW6GE07R5Otb-98Ezbk5IvaSS-w/exec"
+  webAppUrl:"https://script.google.com/macros/s/AKfycbzMlGpSFI9ZQL40fxq4rWSvCyFHRtzqLjEMT5cKy3lz2XVZw9d9YIrFFQ52XTa7SKBzTA/exec"
 };
 let counter=Number(localStorage.getItem("atd_service_counter")||"1");
 const reportNo=()=>`SR_ATD_22AD0005${String(counter).padStart(3,"0")}`;
