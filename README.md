@@ -1,35 +1,32 @@
-AutomationTodayCA Service Report — V14
+# AutomationTodayCA Service Report — V14
 
-PACKAGE
-- index.html — V14-compatible form structure
-- app.js — tested authentication/security baseline plus V14 form UX/data layer
-- style.css — tested form styling
-- Code.gs — tested V13 backend/security baseline with multi-email support
-- atd-logo.png — AutomationTodayCA logo
+## Package
+- `index.html` — frontend form
+- `app.js` — frontend logic, Google authentication lock, form UX, PDF and delivery
+- `style.css` — frontend styling
+- `atd-logo.png` — company logo
+- `Code.gs` — Google Apps Script backend
 
-V14 FORM UX
-- Section/progress status: green = complete, yellow = missing optional information, red = missing required information.
-- Missing required fields are highlighted yellow while filling the form.
-- Section 1 Customer Information is required.
-- Section 2 required service date, start time, end time, technician, and service type.
-- Section 5 Customer Approval requires customer name and signature.
-- Section 6 represents overall final completion.
-- Customer email supports multiple addresses with add/remove controls; at least one email is required.
-- Customer phone supports multiple numbers with add/remove controls; phone remains optional.
-- Start Time and End Time are required and are included in review/PDF data.
-- Existing equipment and parts repeaters are preserved.
+## V14 changes
+- Multiple customer email fields: Add / Remove as needed; at least one valid email is required.
+- Multiple customer phone fields: Add / Remove as needed; optional.
+- Required Start Time and End Time fields.
+- Required fields are highlighted yellow while incomplete so they are easy to find.
+- Section/progress indicators show: red = missing required information, yellow = missing optional information, green = complete.
+- Customer emails are sent to all valid entered customer email addresses plus the company email configured in Apps Script.
+- Start/end time and multiple contacts are included in the review and customer PDF.
 
-SECURITY — DO NOT CHANGE
-- Google authentication flow is preserved.
-- Server-side Google ID token verification is preserved.
-- Authorization proof flow is preserved.
-- OAuth client ID/security architecture is preserved.
-- Private backend configuration remains in Apps Script Script Properties.
-- ATD_SECRET remains in Script Properties and is not embedded in the frontend.
-- Drive storage and Gmail delivery remain server-side.
+## Security
+The Google authentication/security block from the supplied working baseline was preserved unchanged. The Google Client ID and server authorization flow were not modified.
 
-DEPLOYMENT
-1. Upload the frontend files to the new GitHub repository.
-2. Keep the Apps Script Code.gs as supplied.
-3. If a new Apps Script deployment URL is created, update DELIVERY_CONFIG.webAppUrl in app.js yourself.
-4. Keep Apps Script Script Properties unchanged unless you intentionally rotate/configure them.
+`ATD_SECRET`, `ALLOWED_GOOGLE_EMAIL`, `COMPANY_EMAIL`, and other private server properties remain in Apps Script Script Properties. Do not place secrets in GitHub/frontend files.
+
+## Deployment
+1. Upload the frontend files to the V14 GitHub Pages repository.
+2. Update `DELIVERY_CONFIG.webAppUrl` in `app.js` with the newly deployed Apps Script `/exec` URL.
+3. Deploy/update the Apps Script backend using `Code.gs`.
+4. Keep Apps Script configured to execute as the authorized account and allow the web app to receive requests as required by the existing deployment.
+5. Test both an authorized Google account and an unauthorized Google account before production use.
+
+## Important
+The Apps Script URL in `app.js` is intentionally left as the existing placeholder/current baseline URL. Replace it with the new deployment URL before testing the new V14 frontend.
